@@ -1,6 +1,6 @@
 # CustomCollection2
 
-To be honest I had to do some research into the inner workings of a dictionary for this project. My resources where from .NET book that I own, some snippets from Stack Overflow, and the actual source code for a .NET dictionary which I didn’t have time to fully dissect. It was a very interesting project and I actually learned quite a lot about dictionaries, such as the fact that they use Hash tables and why they are so fast. 
+To be honest I had to do some research into the inner workings of a dictionary for this project. My resources where from a .NET book that I own, some snippets from Stack Overflow, and the actual source code for a .NET dictionary which I didn’t have time to fully dissect. It was a very interesting project and I actually learned quite a lot about dictionaries, such as the fact that they use Hash tables and why they are so fast. 
 
 I basically implemented a list with some generic key value pairs. They are strongly typed on instantiation and take any type of variable. I used Equals instead of the (==) operator and this does seem to compare objects as well as other variable types. 
 
