@@ -1,0 +1,6 @@
+c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.exe.config
+c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.csprojResolveAssemblyReference.cache
+c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.exe
+c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.pdb
+c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.exe
+c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.pdb
