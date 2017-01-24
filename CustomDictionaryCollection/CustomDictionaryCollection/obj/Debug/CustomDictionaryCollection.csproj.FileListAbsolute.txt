@@ -4,3 +4,9 @@ c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection
 c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.pdb
 c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.exe
 c:\users\jpluck\documents\visual studio 2013\Projects\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.pdb
+C:\Users\jpluck\Documents\GitHub\CustomCollection\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.exe.config
+C:\Users\jpluck\Documents\GitHub\CustomCollection\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.exe
+C:\Users\jpluck\Documents\GitHub\CustomCollection\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.pdb
+C:\Users\jpluck\Documents\GitHub\CustomCollection\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.exe
+C:\Users\jpluck\Documents\GitHub\CustomCollection\CustomDictionaryCollection\CustomDictionaryCollection\bin\Debug\CustomDictionaryCollection.pdb
+C:\Users\jpluck\Documents\GitHub\CustomCollection\CustomDictionaryCollection\CustomDictionaryCollection\obj\Debug\CustomDictionaryCollection.csprojResolveAssemblyReference.cache

@@ -10,21 +10,41 @@ namespace CustomDictionaryCollection
 
     public class LookupList<T1, T2> : IEnumerable, ILookupList<T1, T2>
     {
+
         /// <summary>
         /// Create a new list with generic key value pairs. On instantiation arguments will be strongly typed.
         /// </summary>
         private List<Lookup<T1, T2>> _list = new List<Lookup<T1, T2>>();
+        private IEqualityComparer<T1> comparer;
+
+
+        public LookupList()
+        {
+            this.comparer = EqualityComparer<T1>.Default;
+        }
+
+        public LookupList(IEqualityComparer<T1> comparer)
+        {
+            this.comparer = comparer ?? EqualityComparer<T1>.Default;
+        }
+
 
         public void Add(T1 arg1, T2 arg2)
         {
             try
             {
+                int hashCode = comparer.GetHashCode(arg1);
+                for (int i = 0; i < _list.Count; i++)
+                {
+                    if (hashCode == comparer.GetHashCode(_list[i].Key) && comparer.Equals(_list[i].Key, arg1))
+                        throw new ExceptionHelper("Duplicate key");
+                }
                 _list.Add(new Lookup<T1, T2>(arg1, arg2));
             }
-            catch(Exception)
+            catch (Exception ex)
             {
                 //LogError Then throw (class not implemented)
-                throw new ExceptionHelper("Failed to add item");
+                throw new ExceptionHelper("Failed to add item Details: {0}", ex.Message);
             }
         }
 
@@ -36,41 +56,6 @@ namespace CustomDictionaryCollection
         {
             return _list.GetEnumerator();
         }
-        
-        /// <summary>
-        /// Custom Equals method accounts for string case sensitivity
-        /// </summary>
-        /// <param name="key1"></param>
-        /// <param name="key2"></param>
-        /// <returns></returns>
-        public bool KeyEquals(T1 key1, T1 key2)
-        {
-            if (key1.GetType() == typeof(String))
-            {
-                return string.Equals(key1.ToString(), key2.ToString(), StringComparison.OrdinalIgnoreCase);
-            }
-            else
-            {
-                return key1.Equals(key2);
-            }
-        }
-        
-        /// <summary>
-        /// Returns the first occurance of the key in the list otherwise returns false
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public bool ContainsKey(T1 key)
-        {
-            foreach (Lookup<T1, T2> item in _list)
-            {
-                if (KeyEquals(key, item.Key) == true)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         /// <summary>
         /// Find a particular items in the list by the key and remove it
@@ -78,12 +63,12 @@ namespace CustomDictionaryCollection
         /// <param name="key"></param>
         public void Remove(T1 key)
         {
-            Lookup<T1, T2> Lookup;
             try
             {
-                if (TryGetValue(key, out Lookup))
+                int i = GetKeyIndex(key);
+                if (i >= 0)
                 {
-                    _list.Remove(Lookup);
+                    _list.RemoveAt(i);
                 }
             }
             catch (Exception)
@@ -101,27 +86,42 @@ namespace CustomDictionaryCollection
             _list.Clear();
         }
 
+
         /// <summary>
-        /// Finds the value by key and returns the value in an out variable
+        /// Finds the index of the key first by hash code then by key value.
+        /// Hash codes are not unique so we also need to check the key. 
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="Lookup"></param>
         /// <returns></returns>
-        public bool TryGetValue(T1 key, out Lookup<T1, T2> Lookup)
+        public int GetKeyIndex(T1 key)
         {
-            Lookup = null;
-            if (!ContainsKey(key))
+            if (key == null)
             {
-                throw new ExceptionHelper("Key not found");
+                throw new ExceptionHelper("Key cannot be null");
             }
-            foreach (Lookup<T1, T2> item in _list)
+
+            if (_list != null)
             {
-                if (KeyEquals(key, item.Key) == true)
+                for (int i = 0; i < _list.Count; i++)
                 {
-                    Lookup = item;
-                    return true;
+                    int hash = comparer.GetHashCode(key);
+                    if (hash == comparer.GetHashCode(_list[i].Key) && comparer.Equals(_list[i].Key, key))
+                        return i;
                 }
             }
+            return -1;
+        }
+
+        public bool TryGetValue(T1 key, out T2 value)
+        {
+            int index = GetKeyIndex(key);
+            if (index >= 0)
+            {
+                value = _list[index].Value;
+                return true;
+            }
+            else
+                value = default(T2);
             return false;
         }
 
@@ -134,21 +134,15 @@ namespace CustomDictionaryCollection
         {
             get
             {
-                if (!ContainsKey(key))
+                int i = GetKeyIndex(key);
+                if (i >= 0)
                 {
-                    throw new ExceptionHelper("Key not found");
-                }
-                foreach (Lookup<T1, T2> item in _list)
-                {
-                    if (KeyEquals(key, item.Key) == true)
-                    {
-                        return item.Value;
-                    }
+                    return _list[i].Value;
                 }
                 return default(T2);
             }
         }
-        
+
         /// <summary>
         /// Property to return all values contained in the list
         /// </summary>
