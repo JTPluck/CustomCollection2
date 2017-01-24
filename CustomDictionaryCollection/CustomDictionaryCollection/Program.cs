@@ -24,11 +24,19 @@ namespace CustomDictionaryCollection
             Console.WriteLine("-------------------------------------------------------------------------");
 
            
-            // This fails just like a real dictionary implementation
+            // This fails with a duplicate key error just like a real dictionary implementation
             //var listString = new LookupList<string, string>(StringComparer.OrdinalIgnoreCase)
             //    {
             //        { "HORSE", "Black Horse" },
             //        { "horse", "White Horse" },
+            //        { "Car", "Red" }
+            //    };
+
+            // This fails with a duplicate key error
+            //var listString = new LookupList<string, string>()
+            //    {
+            //        { "HORSE", "Black Horse" },
+            //        { "HORSE", "White Horse" },
             //        { "Car", "Red" }
             //    };
 
